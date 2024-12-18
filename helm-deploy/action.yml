@@ -69,14 +69,14 @@ runs:
       if: ${{ inputs.dry_run }} == "true"
       shell: bash
       run: |
-        HELM_CMD="helm diff"
+        HELM_CMD="helm diff upgrade"
         HELM_CMD+=" ${{ inputs.release_name }}"
         HELM_CMD+=" ${{ inputs.chart }}"
         HELM_CMD+=" --namespace ${{ inputs.namespace }}"
         
         # Add optional flags based on inputs
         if [ -n "${{ inputs.values_file }}" ]; then
-          HELM_CMD+=" -f ${{ inputs.values_file }}"
+          HELM_CMD+=" --values ${{ inputs.values_file }}"
         fi
         
         if [ -n "${{ inputs.version }}" ]; then
@@ -108,7 +108,7 @@ runs:
         
         # Add optional flags based on inputs
         if [ -n "${{ inputs.values_file }}" ]; then
-          HELM_CMD+=" -f ${{ inputs.values_file }}"
+          HELM_CMD+=" --values ${{ inputs.values_file }}"
         fi
         
         if [ -n "${{ inputs.version }}" ]; then
