@@ -1,0 +1,108 @@
+name: 'Helm Upgrade Action'
+description: 'Performs a helm upgrade with configurable options'
+inputs:
+  release_name:
+    description: 'Name of the Helm release'
+    required: true
+  chart:
+    description: 'Chart name or path'
+    required: true
+  namespace:
+    description: 'Kubernetes namespace'
+    required: true
+  values_file:
+    description: 'Path to values file'
+    required: false
+  version:
+    description: 'Specify a version constraint for the chart version to use'
+    required: false
+  timeout:
+    description: 'Time to wait for any individual Kubernetes operation'
+    required: false
+    default: '5m0s'
+  atomic:
+    description: 'If set, upgrade process rolls back changes made in case of failed upgrade'
+    required: false
+    default: 'true'
+  install:
+    description: 'If a release by this name doesn't already exist, run an install'
+    required: false
+    default: 'true'
+  force:
+    description: 'Force resource updates through a replacement strategy'
+    required: false
+    default: 'false'
+  wait:
+    description: 'Wait until all resources are ready'
+    required: false
+    default: 'true'
+  create_namespace:
+    description: 'Create the release namespace if not present'
+    required: false
+    default: 'false'
+  set_values:
+    description: 'Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)'
+    required: false
+  kubeconfig:
+    description: 'Path to kubeconfig file'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Helm
+      shell: bash
+      run: |
+        curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+    - name: Helm upgrade
+      shell: bash
+      run: |
+        HELM_CMD="helm upgrade"
+        HELM_CMD+=" ${{ inputs.release_name }}"
+        HELM_CMD+=" ${{ inputs.chart }}"
+        HELM_CMD+=" --namespace ${{ inputs.namespace }}"
+        
+        # Add optional flags based on inputs
+        if [ -n "${{ inputs.values_file }}" ]; then
+          HELM_CMD+=" -f ${{ inputs.values_file }}"
+        fi
+        
+        if [ -n "${{ inputs.version }}" ]; then
+          HELM_CMD+=" --version ${{ inputs.version }}"
+        fi
+        
+        if [ -n "${{ inputs.timeout }}" ]; then
+          HELM_CMD+=" --timeout ${{ inputs.timeout }}"
+        fi
+        
+        if [ "${{ inputs.atomic }}" == "true" ]; then
+          HELM_CMD+=" --atomic"
+        fi
+        
+        if [ "${{ inputs.install }}" == "true" ]; then
+          HELM_CMD+=" --install"
+        fi
+        
+        if [ "${{ inputs.force }}" == "true" ]; then
+          HELM_CMD+=" --force"
+        fi
+        
+        if [ "${{ inputs.wait }}" == "true" ]; then
+          HELM_CMD+=" --wait"
+        fi
+        
+        if [ "${{ inputs.create_namespace }}" == "true" ]; then
+          HELM_CMD+=" --create-namespace"
+        fi
+        
+        if [ -n "${{ inputs.set_values }}" ]; then
+          HELM_CMD+=" --set ${{ inputs.set_values }}"
+        fi
+        
+        if [ -n "${{ inputs.kubeconfig }}" ]; then
+          export KUBECONFIG="${{ inputs.kubeconfig }}"
+        fi
+        
+        echo "Executing: $HELM_CMD"
+        eval $HELM_CMD
