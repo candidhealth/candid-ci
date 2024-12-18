@@ -8,7 +8,7 @@ This GitHub Action performs Helm upgrades with configurable options, supporting 
 
 ```yaml
 steps:
-  - uses: candidhealth/candid-ci/helm-deploy
+  - uses: candidhealth/candid-ci/helm-deploy@v1
     with:
       release_name: my-application
       chart: ./charts/application
@@ -19,7 +19,7 @@ steps:
 
 ```yaml
 steps:
-  - uses: candidhealth/candid-ci/helm-deploy
+  - uses: candidhealth/candid-ci/helm-deploy@v1
     with:
       release_name: my-application
       chart: ./charts/application
@@ -63,7 +63,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - uses: candidhealth/candid-ci/helm-deploy
+      - uses: candidhealth/candid-ci/helm-deploy@v1
         with:
           release_name: myapp-${{ matrix.environment }}
           chart: ./charts/myapp
