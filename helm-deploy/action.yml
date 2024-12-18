@@ -1,51 +1,55 @@
 name: 'Helm Upgrade Action'
 description: 'Performs a helm upgrade with configurable options'
 inputs:
-  release_name:
-    description: 'Name of the Helm release'
-    required: true
+  atomic:
+    description: 'If set, upgrade process rolls back changes made in case of failed upgrade'
+    required: false
+    default: 'true'
   chart:
     description: 'Chart name or path'
     required: true
+  create_namespace:
+    description: 'Create the release namespace if not present'
+    required: false
+    default: 'false'
+  dry_run:
+    description: 'Simulate an upgrade'
+    required: false
+    default: 'false'
+  force:
+    description: 'Force resource updates through a replacement strategy'
+    required: false
+    default: 'false'
+  install:
+    description: 'If a release by this name doesn't already exist, run an install'
+    required: false
+    default: 'true'
+  kubeconfig:
+    description: 'Path to kubeconfig file'
+    required: false
   namespace:
     description: 'Kubernetes namespace'
     required: true
+  release_name:
+    description: 'Name of the Helm release'
+    required: true
+  set_values:
+    description: 'Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)'
+    required: false
+  timeout:
+    description: 'Time to wait for any individual Kubernetes operation'
+    required: false
+    default: '5m0s'
   values_file:
     description: 'Path to values file'
     required: false
   version:
     description: 'Specify a version constraint for the chart version to use'
     required: false
-  timeout:
-    description: 'Time to wait for any individual Kubernetes operation'
-    required: false
-    default: '5m0s'
-  atomic:
-    description: 'If set, upgrade process rolls back changes made in case of failed upgrade'
-    required: false
-    default: 'true'
-  install:
-    description: 'If a release by this name doesn't already exist, run an install'
-    required: false
-    default: 'true'
-  force:
-    description: 'Force resource updates through a replacement strategy'
-    required: false
-    default: 'false'
   wait:
     description: 'Wait until all resources are ready'
     required: false
     default: 'true'
-  create_namespace:
-    description: 'Create the release namespace if not present'
-    required: false
-    default: 'false'
-  set_values:
-    description: 'Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)'
-    required: false
-  kubeconfig:
-    description: 'Path to kubeconfig file'
-    required: false
 
 runs:
   using: 'composite'
@@ -78,6 +82,10 @@ runs:
         
         if [ "${{ inputs.atomic }}" == "true" ]; then
           HELM_CMD+=" --atomic"
+        fi
+
+        if [ "${{ inputs.dry_run }}" == "true" ]; then
+          HELM_CMD+=" --dry-run"
         fi
         
         if [ "${{ inputs.install }}" == "true" ]; then
