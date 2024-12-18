@@ -21,7 +21,7 @@ inputs:
     required: false
     default: 'false'
   install:
-    description: 'If a release by this name doesn't already exist, run an install'
+    description: 'If a release by this name doesn''t already exist, run an install'
     required: false
     default: 'true'
   kubeconfig:
