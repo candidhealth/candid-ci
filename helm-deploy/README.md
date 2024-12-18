@@ -79,24 +79,25 @@ jobs:
 
 | Input | Description |
 |-------|-------------|
-| `release_name` | Name of the Helm release |
 | `chart` | Chart reference (path/name) |
 | `namespace` | Kubernetes namespace |
+| `release_name` | Name of the Helm release |
 
 ### Optional Inputs
 
 | Input | Description | Default |
 |-------|-------------|---------|
+| `atomic` | Roll back on failed upgrade | `true` |
+| `create_namespace` | Create namespace if missing | `false` |
+| `dry_run` | Simulate an upgrade | `false` |
+| `force` | Force resource updates | `false` |
+| `install` | Install if release not present | `true` |
+| `kubeconfig` | Path to kubeconfig file | `""` |
+| `set_values` | Set values on command line | `""` |
+| `timeout` | Time to wait for operations | `5m0s` |
 | `values_file` | Path to values YAML file | `""` |
 | `version` | Version constraint for the chart | `""` |
-| `timeout` | Time to wait for operations | `5m0s` |
-| `atomic` | Roll back on failed upgrade | `true` |
-| `install` | Install if release not present | `true` |
-| `force` | Force resource updates | `false` |
 | `wait` | Wait for resources to be ready | `true` |
-| `create_namespace` | Create namespace if missing | `false` |
-| `set_values` | Set values on command line | `""` |
-| `kubeconfig` | Path to kubeconfig file | `""` |
 
 ## Advanced Usage Tips
 
