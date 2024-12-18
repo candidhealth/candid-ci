@@ -61,8 +61,44 @@ runs:
       shell: bash
       run: |
         curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+    - name: Install Helm diff
+      if: ${{ inputs.dry_run }} == "true"
+      shell: bash
+      run: helm plugin install https://github.com/databus23/helm-diff
+    - name: Helm diff
+      if: ${{ inputs.dry_run }} == "true"
+      shell: bash
+      run: |
+        HELM_CMD="helm diff"
+        HELM_CMD+=" ${{ inputs.release_name }}"
+        HELM_CMD+=" ${{ inputs.chart }}"
+        HELM_CMD+=" --namespace ${{ inputs.namespace }}"
+        
+        # Add optional flags based on inputs
+        if [ -n "${{ inputs.values_file }}" ]; then
+          HELM_CMD+=" -f ${{ inputs.values_file }}"
+        fi
+        
+        if [ -n "${{ inputs.version }}" ]; then
+          HELM_CMD+=" --version ${{ inputs.version }}"
+        fi
+        
+        if [ -n "${{ inputs.set_values }}" ]; then
+          HELM_CMD+=" --set ${{ inputs.set_values }}"
+        fi
 
+        if [ -n "${{ inputs.repository }}" ]; then
+          HELM_CMD+=" --repo ${{ inputs.repository }}"
+        fi
+        
+        if [ -n "${{ inputs.kubeconfig }}" ]; then
+          export KUBECONFIG="${{ inputs.kubeconfig }}"
+        fi
+        
+        echo "Executing: $HELM_CMD"
+        eval $HELM_CMD
     - name: Helm upgrade
+      if: ${{ inputs.dry_run }} == "true"
       shell: bash
       run: |
         HELM_CMD="helm upgrade"
