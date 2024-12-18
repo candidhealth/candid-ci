@@ -33,6 +33,9 @@ inputs:
   release_name:
     description: 'Name of the Helm release'
     required: true
+  repository:
+    description: 'Helm chart repository. Only used for remote charts'
+    required: false
   set_values:
     description: 'Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)'
     required: false
@@ -106,6 +109,10 @@ runs:
         
         if [ -n "${{ inputs.set_values }}" ]; then
           HELM_CMD+=" --set ${{ inputs.set_values }}"
+        fi
+
+        if [ -n "${{ inputs.repository }}" ]; then
+          HELM_CMD+=" --repo ${{ inputs.repository }}"
         fi
         
         if [ -n "${{ inputs.kubeconfig }}" ]; then

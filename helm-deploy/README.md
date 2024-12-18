@@ -93,6 +93,7 @@ jobs:
 | `force` | Force resource updates | `false` |
 | `install` | Install if release not present | `true` |
 | `kubeconfig` | Path to kubeconfig file | `""` |
+| `repository` | Helm chart reposiotry. Only used for remote charts. | `""` |
 | `set_values` | Set values on command line | `""` |
 | `timeout` | Time to wait for operations | `5m0s` |
 | `values_file` | Path to values YAML file | `""` |
