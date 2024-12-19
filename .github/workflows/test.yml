@@ -25,3 +25,18 @@ jobs:
           gcloud auth configure-docker us-west2-docker.pkg.dev --quiet
       - name: Whoami
         run: gcloud auth list
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          config-inline: |
+            [registry."docker.io"]
+              mirrors = ["us-west2-docker.pkg.dev/candid-central/docker-remote"]
+      - name: Build and push (workflow dispatch)
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          context: tmp
+          tags: |
+            us-west2-docker.pkg.dev/candid-central/candid-images/actions-runner:hluck-test
+          cache-from: type=registry,ref=us-west2-docker.pkg.dev/candid-central/candid-images/actions-runner:buildcache
+          cache-to: type=registry,ref=us-west2-docker.pkg.dev/candid-central/candid-images/actions-runner:buildcache,mode=max
