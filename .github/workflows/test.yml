@@ -16,6 +16,7 @@ jobs:
       with:
         create_credentials_file: 'true'
         project_id: candid-central
+        token_format: 'access_token'
         workload_identity_provider: projects/248397366714/locations/global/workloadIdentityPools/github-pool/providers/github-provider
         service_account: 'github-actions-publisher@candid-central.iam.gserviceaccount.com'
     - name: Set up SDK
