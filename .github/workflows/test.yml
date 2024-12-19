@@ -20,6 +20,8 @@ jobs:
         service_account: 'github-actions-publisher@candid-central.iam.gserviceaccount.com'
     - name: Set up SDK
       uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: candid-central
     - name: Set Project
       run: |
         gcloud config set project candid-central
