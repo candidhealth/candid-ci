@@ -1,5 +1,19 @@
 # Setup Docker Github Action
 
+Executes common docker setup tasks, including Google Artifact Registry auth and Buildx configuration.
+
+## Usage
+
+### Basic Example
+
+```yaml
+steps:
+- uses: candidhealth/candid-ci/setup-docker@main
+  with:
+    registry: my.cool.registry
+    access_token: ${{ secrets.ACCESS_TOKEN }}
+```
+
 ## Input Parameters
 
 ### Required Inputs

@@ -3,7 +3,7 @@
 A collection of Github Actions to be consumed from Github Actions workflows.
 
 ## Available Actions
-### [Get Author Info](./get-auth-info/README.md)
+### [Get Author Info](./get-author-info/README.md)
 
 Gets name, Github ID, Pagerduty ID, and Slack ID for author of the latest commit.
 

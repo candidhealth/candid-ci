@@ -1,5 +1,20 @@
 # Notify Slack Channel Github Action
 
+Sends slack messages concerning deployments.
+
+## Usage
+
+### Basic Example
+
+```yaml
+steps:
+- uses: candidhealth/candid-ci/notify-slack-channel@main
+  with:
+    environment: dev
+    deploy_status: Completed
+    slack_token: ${{ secrets.SLACK_BOT_TOKEN }}
+```
+
 ## Input Parameters
 
 ### Required Inputs

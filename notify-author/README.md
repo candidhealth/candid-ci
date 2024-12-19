@@ -1,5 +1,19 @@
 # Notify Author Github Action
 
+Sends slack message to the Author of the latest commit.
+
+## Usage
+
+### Basic Example
+
+```yaml
+steps:
+- uses: candidhealth/candid-ci/notify-author@main
+  with:
+    slack_token: ${{ secrets.SLACK_TOKEN }}
+    message: "Hello, world!"
+```
+
 ## Input Parameters
 
 ### Required Inputs
