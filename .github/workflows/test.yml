@@ -8,8 +8,8 @@ jobs:
         id-token: write
         contents: read
       steps:
-      - name: Set up SDK
-        uses: google-github-actions/setup-gcloud@v2
+      - name: Checkout
+        uses: actions/checkout@v3
       - id: 'auth'
         name: OIDC auth
         uses: 'google-github-actions/auth@v2'
@@ -18,6 +18,8 @@ jobs:
           project_id: candid-central
           workload_identity_provider: projects/248397366714/locations/global/workloadIdentityPools/github-pool/providers/github-provider
           service_account: 'github-actions-publisher@candid-central.iam.gserviceaccount.com'
+      - name: Set up SDK
+        uses: google-github-actions/setup-gcloud@v2
       - name: Docker Login
         run: |
           gcloud auth configure-docker us-west2-docker.pkg.dev --quiet
