@@ -1,0 +1,45 @@
+name: Notify Author
+description: 'Sends slack message to the Author of the latest commit'
+
+inputs:
+  slack_token:
+    type: string
+    required: true
+  message:
+    description: The contents of the message to send to the author. Supports slack's mrkdwn format.
+    type: string
+    required: true
+  update_existing:
+    description: The timestamp of a deployment slack message to update instead of sending a new message.
+    type: string
+
+outputs:
+  message_ts:
+    value: ${{ steps.slack_message.outputs.ts }}
+
+runs:
+  using: "composite"
+  steps:
+    - uses: candidhealth/candid-ci/get-author-info@main
+      id: author_info
+
+    - name: Send Slack Message
+      id: slack_message
+      uses: slackapi/slack-github-action@v1.25.0
+      with:
+        channel-id: ${{ steps.author_info.outputs.slack_id != '' && steps.author_info.outputs.slack_id || 'C06F9D7HXPG' }}
+        update-ts: ${{ inputs.update_existing }}
+        payload: |
+          {
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ${{ toJSON(inputs.message) }}
+                }
+              }
+            ]
+          }
+      env:
+        SLACK_BOT_TOKEN: ${{ inputs.slack_token }}

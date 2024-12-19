@@ -1,0 +1,34 @@
+name: 'Get commit author info'
+description: 'Gets name, Github ID, Pagerduty ID, and Slack ID for author of the latest commit'
+
+outputs:
+  author:
+    value: ${{ steps.author_info.outputs.author }}
+  name:
+    value: ${{ steps.author_info.outputs.name }}
+  github_id:
+    value: ${{ steps.author_info.outputs.github_id }}
+  pagerduty_id:
+    value: ${{ steps.author_info.outputs.pagerduty_id }}
+  slack_id:
+    value: ${{ steps.author_info.outputs.slack_id }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Get Commit Author Information
+      id: author_info
+      shell: bash
+      run: |
+        AUTHOR=$(git log -1 --pretty=format:"%an")
+        echo "Found author: \"${AUTHOR}\""
+        AUTHOR_NAME=$(jq -r ".\"${AUTHOR}\".name // empty" ./candid-users-map.json)
+        GITHUB_ID=$(jq -r ".\"${AUTHOR}\".github // empty" ./candid-users-map.json)
+        PAGERDUTY_ID=$(jq -r ".\"${AUTHOR}\".pagerduty // empty" ./candid-users-map.json)
+        SLACK_ID=$(jq -r ".\"${AUTHOR}\".slack_id // empty" ./candid-users-map.json)
+        set -x
+        echo "author=${AUTHOR}" >> $GITHUB_OUTPUT
+        echo "name=${AUTHOR_NAME}" >> $GITHUB_OUTPUT
+        echo "github_id=${GITHUB_ID}" >> $GITHUB_OUTPUT
+        echo "pagerduty_id=${PAGERDUTY_ID}" >> $GITHUB_OUTPUT
+        echo "slack_id=${SLACK_ID}" >> $GITHUB_OUTPUT

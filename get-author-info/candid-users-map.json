@@ -1,0 +1,283 @@
+{
+  "Adam Borochoff": {
+    "name": "Adam Borochoff",
+    "github": "aborochoff",
+    "pagerduty": "",
+    "slack_id": "U05LMK7UX0B"
+  },
+  "al-stolz": {
+    "name": "Al Stolz",
+    "github": "al-stolz",
+    "pagerduty": "",
+    "slack_id": "U03A5MGCD9C"
+  },
+  "AliAliEp": {
+    "name": "Ali Epstein",
+    "github": "AliAliEp",
+    "pagerduty": "",
+    "slack_id": "U04BH25HD34"
+  },
+  "Ben Duffield": {
+    "name": "Ben Duffield",
+    "github": "candidbenduffield",
+    "pagerduty": "",
+    "slack_id": "U075G4B0FPZ"
+  },
+  "Brett Flora": {
+    "name": "Brett Flora",
+    "github": "okbytes",
+    "pagerduty": "PIZ21IT",
+    "slack_id": "U051M5MP8JU"
+  },
+  "Brooke": {
+    "name": "Brooke Green",
+    "github": "CPTNB",
+    "pagerduty": "PBQT0TD",
+    "slack_id": "U05NZB3E71D"
+  },
+  "Chandler Moisen": {
+    "name": "Chandler Moisen",
+    "github": "candid-chandler",
+    "pagerduty": "",
+    "slack_id": "U07NHKZKMUJ"
+  },
+  "danielatejada95": {
+    "name": "Daniela Tejada",
+    "github": "danielatejada95",
+    "pagerduty": "",
+    "slack_id": "U04JJL81Y1G"
+  },
+  "David Godow": {
+    "name": "David Godow",
+    "github": "dgodow",
+    "pagerduty": "P3C7RC8",
+    "slack_id": "U02LV3PMESD"
+  },
+  "Doug Proctor": {
+    "name": "Doug Proctor",
+    "github": "dougproctor",
+    "pagerduty": "PH10BSO",
+    "slack_id": "U02L9Q8GFSA"
+  },
+  "Eric Xie": {
+    "name": "Eric Xie",
+    "github": "xiexieeric",
+    "pagerduty": "PQK161K",
+    "slack_id": "U056K2SEJTY"
+  },
+  "graceromer": {
+    "name": "Grace Romer",
+    "github": "graceromer",
+    "pagerduty": "",
+    "slack_id": "U03NBEATVM3"
+  },
+  "Hank Jaensch": {
+    "name": "Hank Jaensch",
+    "github": "hjaensch7",
+    "pagerduty": "P2KFIZQ",
+    "slack_id": "U04QFC581SS"
+  },
+  "Jess O": {
+    "name": "Jess Ochs-Willard",
+    "github": "jochs",
+    "pagerduty": "PV6SUVB",
+    "slack_id": "U038P6B3L30"
+  },
+  "Jim Inoue": {
+    "name": "Jim Inoue",
+    "github": "jinoue3",
+    "pagerduty": "",
+    "slack_id": "U0769AZHDMX"
+  },
+  "Joe Naso": {
+    "name": "Joe Naso",
+    "github": "JoeNaso",
+    "pagerduty": "",
+    "slack_id": "U06FBEURXGC"
+  },
+  "John Chakerian": {
+    "name": "John Chakerian",
+    "github": "jchakerianch",
+    "pagerduty": "",
+    "slack_id": "U075WL1C2JX"
+  },
+  "John Drinkwater": {
+    "name": "John Drinkwater",
+    "github": "JDrinkH2O",
+    "pagerduty": "P5NO51J",
+    "slack_id": "U05UDLD94RX"
+  },
+  "Josh Showalter": {
+    "name": "Josh Showalter",
+    "github": "joshshowalter",
+    "pagerduty": "",
+    "slack_id": "U0714SGE8LV"
+  },
+  "Justin Malin": {
+    "name": "Justin Malin",
+    "github": "jrmalin",
+    "pagerduty": "P3ZKCGP",
+    "slack_id": "U053Q30CKRS"
+  },
+  "karabrenholt": {
+    "name": "Kara Brenholt",
+    "github": "karabrenholt",
+    "pagerduty": "PR533O9",
+    "slack_id": "U05UKRM6ZD5"
+  },
+  "kavya-ravikanti": {
+    "name": "Kavya Ravikanti",
+    "github": "kavya-ravikanti",
+    "pagerduty": "",
+    "slack_id": "U01ANDCQ8DD"
+  },
+  "Leslie Bresnahan": {
+    "name": "Leslie Bresnahan",
+    "github": "lesbres",
+    "pagerduty": "PSIU5ET",
+    "slack_id": "U0714SGG1EZ"
+  },
+  "matthew-giglio": {
+    "name": "Matthew Giglio",
+    "github": "matthew-giglio",
+    "pagerduty": "PU4GM20",
+    "slack_id": "U05JEJV9A57"
+  },
+  "Michael B. Stoeckel": {
+    "name": "Michael Stoeckel",
+    "github": "mstoeckel",
+    "pagerduty": "P7OVSRY",
+    "slack_id": "U033G3RHDKR"
+  },
+  "Natalie Delcarson": {
+    "name": "Natalie Delcarson",
+    "github": "npdelcarson",
+    "pagerduty": "",
+    "slack_id": "U03B23WV49E"
+  },
+  "Nick Nicolini": {
+    "name": "Nick Nicolini",
+    "github": "nicknicolini",
+    "pagerduty": "P0FOJAY",
+    "slack_id": "U03H3T6BQLQ"
+  },
+  "Nick Perry": {
+    "name": "Nick Perry",
+    "github": "nickp",
+    "pagerduty": "P9OSH43",
+    "slack_id": "UGJ6A0BPS"
+  },
+  "Sankruth Kota": {
+    "name": "Sankruth Kota",
+    "github": "skota121",
+    "pagerduty": "PNKGT3L",
+    "slack_id": "U036VCC5NR1"
+  },
+  "Stanley Li": {
+    "name": "Stanley Li",
+    "github": "candidstanleyl",
+    "pagerduty": "",
+    "slack_id": "U07BMDHD4NM"
+  },
+  "Stephen Mark": {
+    "name": "Stephen Mark",
+    "github": "stephenjmark",
+    "pagerduty": "",
+    "slack_id": "U07E2EHTVV1"
+  },
+  "Steve Nkuranga": {
+    "name": "Steve Nkuranga",
+    "github": "snkuranga-candid",
+    "pagerduty": "PAJTZX3",
+    "slack_id": "U02LV4JG4CR"
+  },
+  "Steve Yazicioglu": {
+    "name": "Steve Yazicioglu",
+    "github": "steveyaz",
+    "pagerduty": "P41ZH4K",
+    "slack_id": "U01AY0WNF4Y"
+  },
+  "tatjana-chow": {
+    "name": "Tatjana Chow",
+    "github": "tatjana-chow",
+    "pagerduty": "",
+    "slack_id": "U064KQ0PMRP"
+  },
+  "timcandidhealth": {
+    "name": "Tim Chung",
+    "github": "timcandidhealth",
+    "pagerduty": "PUWP6EN",
+    "slack_id": "U050XEZSP7C"
+  },
+  "josietheile": {
+    "name": "Josie Theile",
+    "github": "josietheile",
+    "pagerduty": "",
+    "slack_id": "U06L3LC3R6G"
+  },
+  "Nicolas Schneider": {
+    "name": "Nicolas Schneider",
+    "github": "nicolaseschneider",
+    "pagerduty": "P5JAOPM",
+    "slack_id": "U07GQ9LNFDK"
+  },
+  "Brandon Hubbard": {
+    "name": "Brandon Hubbard",
+    "github": "brandon-hubbard",
+    "pagerduty": "",
+    "slack_id": "U06NQAQ976E"
+  },
+  "Amymaxim": {
+    "name": "Amy Maxim",
+    "github": "Amymaxim",
+    "pagerduty": "",
+    "slack_id": "U04MELMFE9H"
+  },
+  "simmyarnold": {
+    "name": "Simmy Arnold",
+    "github": "simmyarnold",
+    "pagerduty": "",
+    "slack_id": "U057VA61Z0T"
+  },
+  "davidj-candid": {
+    "name": "David Jetter",
+    "github": "davidj-candid",
+    "pagerduty": "",
+    "slack_id": "U070F4FQ5CM"
+  },
+  "Thomas Wunderlich": {
+    "name": "Thomas Wunderlich",
+    "github": "ThomasWunderlich",
+    "pagerduty": "",
+    "slack_id": "U07EF7609L1"
+  },
+  "crudewicz": {
+    "name": "Chris Rudewicz",
+    "github": "crudewicz",
+    "pagerduty": "",
+    "slack_id": "U05M8EWJP8D"
+  },
+  "Gabriela Santiago": {
+    "name": "Gabriela Santiago",
+    "github": "GabrielaSantiagoFr",
+    "pagerduty": "",
+    "slack_id": "U07RTBU9PMH"
+  },
+  "nate giraldi": {
+    "name": "Nate Giraldi",
+    "github": "n8sty",
+    "pagerduty": "",
+    "slack_id": "U07HRLJ051U"
+  },
+
+  "Example! JSON doesn't do comments so this will have to do. Add your new entry above this one. Your entry should look like": {
+
+  "The top level key should be what shows up for your name in the git log. This could be your github ID, or could be a custom set username if you have one configured. Check the `git log` with pretty formatting for author name to see what shows up for your user": {
+    "name": "Your name, human readable",
+    "github": "this is your github ID",
+    "pagerduty": "Your pagerduty user ID. Go to your pagerduty user page in your browser and look at the URL to find this value. If you aren't in pagerduty, leave these quotes empty",
+    "slack_id": "Your slack member ID. Click your user in slack, the three dots, and  `copy member ID` to get this value"
+  }
+
+  }
+}

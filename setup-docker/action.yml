@@ -1,0 +1,63 @@
+name: 'Setup Docker'
+description: 'Executes common docker setup tasks, including Google Artifact Registry auth and Buildx configuration'
+inputs:
+  registry:
+    required: true
+  access_token:
+    required: true
+outputs:
+  github_ref:
+    description: "Docker friendly ref name"
+    value: ${{ steps.export.outputs.github_ref }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Login to GAR
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ inputs.registry }}
+        username: oauth2accesstoken
+        password: ${{ inputs.access_token }}
+
+    - if: inputs.registry != 'us-central1-docker.pkg.dev'
+      name: Login to DockerHub Mirror
+      uses: docker/login-action@v2
+      with:
+        registry: us-central1-docker.pkg.dev
+        username: oauth2accesstoken
+        password: ${{ inputs.access_token }}
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v3
+      with:
+        buildkitd-config-inline: |
+          [registry."us-central1-docker.pkg.dev/candid-staging/docker-remote"]
+
+    # This doesn't work just yet, I'm writing this comment three hours after the fix
+    # got merged in the moby project. https://github.com/moby/moby/issues/36598
+    # I hope to turn this logic back on soon, or after we're on our own runners for GHA.
+    # For now, we'll keep BuildX and Buildkit around in order to use a registry mirror
+    # with a subpath. Also if we moved to self-hosted runners we could configure the
+    # registry mirror on the cluster level, which would be v nice
+    #
+    # - name: Add dockerhub mirror to daemon.json
+    #   shell: bash
+    #   run: |
+    #     sudo jq '. + {"registry-mirrors":["https://us-central1-docker.pkg.dev/candid-staging/docker-remote"]}' /etc/docker/daemon.json > daemon.tmp
+    #     sudo mv daemon.tmp /etc/docker/daemon.json
+    #     sudo systemctl restart docker
+    #     cat /etc/docker/daemon.json
+
+    - run: docker --version
+      shell: bash
+
+    - name: Export Outputs
+      id: export
+      shell: bash
+      run: |
+        echo "github_ref=`echo $BRANCH_NAME | sed -e 's/\//_/g'`" >> $GITHUB_OUTPUT

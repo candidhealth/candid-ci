@@ -1,0 +1,91 @@
+name: Deploys Slack
+description: 'Sends slack messages concerning deployments'
+
+inputs:
+  slack_token:
+    type: string
+    required: true
+  environment:
+    type: string
+    required: true
+  deploy_status:
+    type: string
+    required: true
+    description: Deploy status string. Color for the message sidebar will be set to red for 'Failed' and green for 'Completed'
+    default: "In Progress"
+  update_existing:
+    description: The timestamp of a deployment slack message to update instead of sending a new message.
+    type: string
+  channel_id:
+    description: The slack channel ID (different than channel name) to notify. Defaults to deploys channel.
+    type: string
+    default: CQECM8V53
+
+outputs:
+  message_ts:
+    value: ${{ steps.deploys_slack_message.outputs.ts }}
+
+runs:
+  using: "composite"
+  steps:
+    - uses: candidhealth/candid-ci/get-author-info@main
+      id: author_info
+
+    - name: Get Git Info
+      id: git_info
+      shell: bash
+      run: |
+        echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        echo "commit_message=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
+        echo "branch_name=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_OUTPUT
+
+    - name: Format Slack Handle
+      id: slack
+      shell: bash
+      env:
+        AUTHOR: ${{ steps.author_info.outputs.author }}
+        SLACK_ID: ${{ steps.author_info.outputs.slack_id }}
+      run: |
+        if [ $SLACK_ID != '' ]; then
+          echo "handle=<@$SLACK_ID>" >> $GITHUB_OUTPUT
+        else
+          echo "handle=$AUTHOR" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Send Slack Message
+      id: deploys_slack_message
+      uses: slackapi/slack-github-action@v1.25.0
+      with:
+        channel-id: ${{ inputs.channel_id }}
+        update-ts: ${{ inputs.update_existing }}
+        payload: |
+          {
+            "attachments": [
+              {
+                "mrkdwn_in": ["pretext", "Commit"],
+                "pretext": "Deployment to `${{ inputs.environment }}` by ${{ steps.slack.outputs.handle }}",
+                "color": "${{ inputs.deploy_status == 'Failed' && '#E34234' || (inputs.deploy_status == 'Completed' && '#ACE1AF' || (inputs.deploy_status == 'In Progress' && '#F4C430' || '#D3D3D3')) }}",
+                "author_name": "Publish and Deploy",
+                "author_link": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                "fields": [
+                  {
+                    "title": "Status",
+                    "short": true,
+                    "value": "${{ inputs.deploy_status }}"
+                  },
+                  {
+                    "title": "Commit",
+                    "short": true,
+                    "value": "<${{ github.server_url }}/${{ github.repository }}/commit/${{github.sha}}|${{ steps.git_info.outputs.sha_short }}> `(${{ steps.git_info.outputs.branch_name }})`"
+                  },
+                  {
+                    "title": "Commit Message",
+                    "short": false,
+                    "value": ${{ toJSON(steps.git_info.outputs.commit_message) }}
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_BOT_TOKEN: ${{ inputs.slack_token }}
