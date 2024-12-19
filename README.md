@@ -1,5 +1,7 @@
 # candid-ci
 
+A collection of Github Actions to be consumed from Github Actions workflows.
+
 ## Available Actions
 ### [Get Author Info](./get-auth-info/README.md)
 
