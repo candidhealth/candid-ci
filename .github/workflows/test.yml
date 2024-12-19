@@ -20,9 +20,6 @@ jobs:
           service_account: 'github-actions-publisher@candid-central.iam.gserviceaccount.com'
       - name: Set up SDK
         uses: google-github-actions/setup-gcloud@v2
-      - name: Gcloud auth login
-        run: |
-          gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
       - name: Docker Login
         run: |
           gcloud auth configure-docker us-west2-docker.pkg.dev --quiet
